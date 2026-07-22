@@ -26,6 +26,12 @@ Os artefatos do estudo E2E em um site externo estão em
 Os artefatos dos testes da API pública de livros estão em
 [`specs/004-demoqa-books-api`](specs/004-demoqa-books-api/).
 
+Os artefatos do gerenciador local de jogos de PS5 estão em
+[`specs/005-ps5-games-manager`](specs/005-ps5-games-manager/).
+
+Os artefatos de descoberta e o rascunho pausado da feature da PokéAPI estão em
+[`specs/006-pokeapi-api`](specs/006-pokeapi-api/).
+
 ## Primeiro MVP
 
 O primeiro incremento é um laboratório de prompts executado no terminal. Ele usa um
@@ -97,6 +103,16 @@ Para estudar a terceira feature, repita a ordem em
 Para estudar a quarta feature, leia `specs/004-demoqa-books-api/` e depois
 `tests-api/demoqa/books-api.spec.ts`. Observe como cada requisito do contrato HTTP
 vira uma asserção de status, cabeçalho ou corpo.
+
+Para estudar a quinta feature, comece em `specs/005-ps5-games-manager/spec.md`, siga
+pelo plano, modelo de dados e contratos, e termine no código em `src/ps5_games_manager/`,
+nos testes Python em `tests/ps5_games_manager_tests/` e nos cenários Playwright em
+`tests-e2e/ps5-games-manager/`.
+
+Para estudar a sexta feature no estado atual, leia primeiro
+`specs/006-pokeapi-api/problem-brief.md`. O arquivo `spec.md` é um rascunho antecipado,
+pausado até o módulo 3, e deve ser revisado a partir das decisões da descoberta antes
+de gerar plano, tarefas, código ou testes.
 
 ## Testes Playwright com TypeScript
 
@@ -288,3 +304,32 @@ npm run report:e2e:ps5
 - A RAWG requer chave, internet e atribuição; seus resultados são sugestões editáveis.
 - Melhorias futuras incluem backup/exportação, ordenação configurável, paginação, cache externo
   compatível com os termos do provedor e suporte opcional a múltiplas plataformas.
+
+## Estudo da API de Pokémon com a PokéAPI
+
+A sexta feature usa a PokéAPI como domínio público, somente leitura e sem autenticação para
+praticar o enquadramento de uma demanda vaga antes de decidir ferramentas ou implementar
+testes. O ator principal é o próprio estudante, e o objetivo é tornar explícitos o problema,
+o resultado esperado, os limites, as hipóteses e as perguntas ainda abertas.
+
+### Estado atual
+
+Esta feature está no módulo 2, em descoberta. Ainda não há plano técnico, tarefas,
+implementação, configuração de execução ou suíte automatizada da PokéAPI neste repositório.
+
+```text
+specs/006-pokeapi-api/problem-brief.md             fonte ativa da descoberta
+specs/006-pokeapi-api/spec.md                      rascunho pausado para o módulo 3
+specs/006-pokeapi-api/checklists/requirements.md   checklist de qualidade reaberto
+```
+
+O recorte em análise considera um Pokémon conhecido, um recurso inexistente e uma pequena
+página do catálogo como exemplos para discutir comportamento e evidências. Esses exemplos
+ainda não constituem uma suíte de testes autorizada.
+
+### Próximo passo do estudo
+
+Antes de avançar, o estudante deve revisar o `problem-brief.md`, responder ou classificar as
+perguntas abertas e registrar quais hipóteses foram confirmadas, rejeitadas ou mantidas. Só
+depois o `spec.md` deve ser revisado no módulo 3; plano, tarefas e automação permanecem fora
+do escopo atual.
