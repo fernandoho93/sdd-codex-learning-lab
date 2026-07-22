@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "prompt-lab-sdd"
+version = "0.1.0"
+description = "Laboratório didático de prompts orientado por especificações"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = []
+
+[project.scripts]
+prompt-lab = "prompt_lab.cli:main"
+prompt-lab-web = "prompt_lab.web:main"
+ps5-games-manager = "ps5_games_manager.__main__:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+prompt_lab = ["web_static/*"]
+ps5_games_manager = ["migrations/*.sql", "web_static/*"]

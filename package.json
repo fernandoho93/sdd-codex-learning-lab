@@ -1,0 +1,28 @@
+{
+  "name": "prompt-lab-e2e",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Estudo SDD com testes E2E do Prompt Lab e DemoQA Books",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:debug": "playwright test --debug",
+    "report:e2e": "playwright show-report",
+    "test:e2e:demoqa": "playwright test --config=playwright.demoqa.config.ts",
+    "test:e2e:demoqa:ui": "playwright test --config=playwright.demoqa.config.ts --ui",
+    "test:e2e:demoqa:debug": "playwright test --config=playwright.demoqa.config.ts --debug",
+    "report:e2e:demoqa": "playwright show-report playwright-report/demoqa",
+    "test:api:demoqa": "playwright test --config=playwright.demoqa-api.config.ts",
+    "test:api:demoqa:ui": "playwright test --config=playwright.demoqa-api.config.ts --ui",
+    "report:api:demoqa": "playwright show-report playwright-report/demoqa-api"
+    ,"test:e2e:ps5": "playwright test --config=playwright.ps5-games-manager.config.ts"
+    ,"test:e2e:ps5:ui": "playwright test --config=playwright.ps5-games-manager.config.ts --ui"
+    ,"report:e2e:ps5": "playwright show-report playwright-report/ps5-games-manager"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.61.1",
+    "@types/node": "^26.1.1",
+    "typescript": "^7.0.2"
+  }
+}
