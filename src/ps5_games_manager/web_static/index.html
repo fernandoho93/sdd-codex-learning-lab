@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>PS5 Games Manager</title>
+  <link rel="stylesheet" href="/assets/app.css">
+</head>
+<body>
+  <header class="hero">
+    <div>
+      <p class="eyebrow">MINHA COLEÇÃO</p>
+      <h1>PS5 Games Manager</h1>
+      <p class="subtitle">Do desejo à platina, todos os seus jogos em um só lugar.</p>
+    </div>
+    <button id="create-button" class="primary" type="button">Cadastrar jogo</button>
+  </header>
+
+  <main>
+    <section class="toolbar" aria-label="Pesquisa e filtros">
+      <label class="search-field">Pesquisar por nome
+        <input id="search" type="search" maxlength="200" placeholder="Ex.: Astro Bot">
+      </label>
+      <label>Gênero
+        <select id="genre-filter"><option value="">Todos</option></select>
+      </label>
+      <label>Status
+        <select id="status-filter">
+          <option value="">Todos</option>
+          <option value="wishlist">Desejo comprar</option>
+          <option value="purchased">Comprado</option>
+          <option value="playing">Jogando</option>
+          <option value="completed">Concluído</option>
+          <option value="abandoned">Abandonado</option>
+        </select>
+      </label>
+      <button id="clear-filters" class="secondary" type="button">Limpar filtros</button>
+    </section>
+
+    <div id="message" class="message" role="status" aria-live="polite"></div>
+    <section aria-labelledby="collection-title">
+      <div class="section-heading">
+        <h2 id="collection-title">Jogos</h2>
+        <span id="game-count" class="count"></span>
+      </div>
+      <div id="collection-state" class="state" aria-live="polite">Carregando jogos...</div>
+      <div id="game-list" class="game-grid"></div>
+    </section>
+  </main>
+
+  <dialog id="game-dialog" aria-labelledby="form-title">
+    <form id="game-form" novalidate>
+      <div class="dialog-heading">
+        <div><p class="eyebrow">COLEÇÃO</p><h2 id="form-title">Cadastrar jogo</h2></div>
+        <button class="icon-button" data-close="game-dialog" type="button" aria-label="Fechar formulário">×</button>
+      </div>
+      <input id="game-id" type="hidden">
+      <input id="source-name" type="hidden">
+      <input id="source-url" type="hidden">
+
+      <section class="catalog-box" aria-labelledby="catalog-title">
+        <h3 id="catalog-title">Preencher pelo catálogo RAWG</h3>
+        <div class="inline-fields">
+          <label>Pesquisar no catálogo RAWG
+            <input id="catalog-query" type="search" maxlength="200" placeholder="Nome do jogo">
+          </label>
+          <button id="catalog-search" class="secondary" type="button">Pesquisar</button>
+        </div>
+        <div id="catalog-state" class="small-state" aria-live="polite"></div>
+        <div id="catalog-results" class="catalog-results"></div>
+      </section>
+
+      <div id="form-summary" class="error-summary" role="alert"></div>
+      <div class="form-grid">
+        <label>Nome <span aria-hidden="true">*</span>
+          <input id="name" name="name" required maxlength="200">
+          <small class="field-error" data-error-for="name"></small>
+        </label>
+        <label>Gênero <span aria-hidden="true">*</span>
+          <input id="genre" name="genre" required maxlength="100">
+          <small class="field-error" data-error-for="genre"></small>
+        </label>
+        <label>Tipo de mídia <span aria-hidden="true">*</span>
+          <select id="media-type" name="media_type" required>
+            <option value="">Selecione</option><option value="physical">Física</option><option value="digital">Digital</option>
+          </select><small class="field-error" data-error-for="media_type"></small>
+        </label>
+        <label>Status <span aria-hidden="true">*</span>
+          <select id="game-status" name="status" required>
+            <option value="">Selecione</option><option value="wishlist">Desejo comprar</option><option value="purchased">Comprado</option><option value="playing">Jogando</option><option value="completed">Concluído</option><option value="abandoned">Abandonado</option>
+          </select><small class="field-error" data-error-for="status"></small>
+        </label>
+        <label>Desenvolvedora<input id="developer" name="developer" maxlength="200"></label>
+        <label>Publicadora<input id="publisher" name="publisher" maxlength="200"></label>
+        <label>Data de lançamento<input id="release-date" name="release_date" type="date"><small class="field-error" data-error-for="release_date"></small></label>
+        <label>Nota pessoal<input id="personal-rating" name="personal_rating" type="number" min="0" max="10" step="0.5"><small class="field-error" data-error-for="personal_rating"></small></label>
+        <label class="full">URL da capa<input id="cover-url" name="cover_url" type="url" maxlength="2048"><small class="field-error" data-error-for="cover_url"></small></label>
+        <label class="full">Descrição<textarea id="description" name="description" maxlength="2000" rows="4"></textarea></label>
+        <label class="full">Observações<textarea id="notes" name="notes" maxlength="5000" rows="4"></textarea></label>
+      </div>
+      <div id="source-attribution" class="attribution" hidden></div>
+      <div class="dialog-actions">
+        <button class="secondary" data-close="game-dialog" type="button">Cancelar</button>
+        <button id="save-game" class="primary" type="submit">Salvar jogo</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="details-dialog" aria-labelledby="details-title">
+    <div class="dialog-heading">
+      <div><p class="eyebrow">DETALHES</p><h2 id="details-title" tabindex="-1">Jogo</h2></div>
+      <button class="icon-button" data-close="details-dialog" type="button" aria-label="Fechar detalhes">×</button>
+    </div>
+    <div id="details-content"></div>
+  </dialog>
+
+  <dialog id="delete-dialog" aria-labelledby="delete-title">
+    <div class="dialog-heading"><h2 id="delete-title">Excluir jogo?</h2></div>
+    <p>Esta ação removerá <strong id="delete-name"></strong> definitivamente.</p>
+    <div class="dialog-actions">
+      <button id="cancel-delete" class="secondary" type="button">Cancelar</button>
+      <button id="confirm-delete" class="danger" type="button">Excluir jogo</button>
+    </div>
+  </dialog>
+
+  <script src="/assets/app.js" defer></script>
+</body>
+</html>

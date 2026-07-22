@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Laboratório local para estudar prompts e SDD">
+    <title>Prompt Lab — laboratório local</title>
+    <link rel="stylesheet" href="/assets/app.css">
+    <script src="/assets/app.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-content">
+        <a class="brand" href="/" aria-label="Prompt Lab, página inicial">
+          <span class="brand-mark" aria-hidden="true">PL</span>
+          <span>Prompt Lab</span>
+        </a>
+        <p>Estude SDD executando experimentos locais, seguros e reproduzíveis.</p>
+      </div>
+    </header>
+
+    <main class="container layout">
+      <section class="card experiment-panel" aria-labelledby="experiment-title">
+        <p class="eyebrow">Experimento local</p>
+        <h1 id="experiment-title">O que você quer explorar?</h1>
+        <p class="intro">
+          O provedor é simulado: nenhum texto sai da sua máquina e não existe custo de API.
+        </p>
+
+        <form id="prompt-form" novalidate>
+          <div class="field-heading">
+            <label for="prompt">Prompt</label>
+            <span id="character-count" aria-live="polite">0 / 10.000</span>
+          </div>
+          <textarea
+            id="prompt"
+            name="prompt"
+            rows="7"
+            maxlength="10000"
+            required
+            aria-describedby="prompt-help character-count"
+            placeholder="Ex.: Explique SDD em três frases"
+          ></textarea>
+          <p id="prompt-help" class="help-text">
+            Digite entre 1 e 10.000 caracteres. Espaços externos serão removidos.
+          </p>
+          <button id="submit-prompt" class="primary-button" type="submit">
+            Executar prompt
+          </button>
+        </form>
+
+        <div id="status-message" class="status-message" role="status" aria-live="polite"></div>
+
+        <section id="result-panel" class="result-panel" aria-labelledby="result-title" hidden>
+          <p class="eyebrow">Execução concluída</p>
+          <h2 id="result-title">Resultado</h2>
+          <p id="result-response" class="response-text"></p>
+          <p class="saved-message">
+            Experimento salvo: <code id="result-id"></code>
+          </p>
+        </section>
+      </section>
+
+      <aside class="card history-panel" aria-labelledby="history-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Seus estudos</p>
+            <h2 id="history-title">Histórico</h2>
+          </div>
+          <button id="refresh-history" class="icon-button" type="button">
+            Atualizar histórico
+          </button>
+        </div>
+        <p id="history-status" class="help-text" role="status" aria-live="polite"></p>
+        <ol id="history-list" class="history-list"></ol>
+      </aside>
+
+      <section
+        id="details-panel"
+        class="card details-panel"
+        aria-labelledby="details-title"
+        tabindex="-1"
+        hidden
+      >
+        <p class="eyebrow">Registro reproduzível</p>
+        <h2 id="details-title">Detalhes do experimento</h2>
+        <dl class="details-grid">
+          <div><dt>ID</dt><dd id="detail-id"></dd></div>
+          <div><dt>Data UTC</dt><dd id="detail-created-at"></dd></div>
+          <div><dt>Provedor</dt><dd id="detail-provider"></dd></div>
+          <div><dt>Modelo</dt><dd id="detail-model"></dd></div>
+          <div><dt>Estado</dt><dd id="detail-status"></dd></div>
+          <div class="wide"><dt>Prompt</dt><dd id="detail-prompt"></dd></div>
+          <div class="wide"><dt>Resposta</dt><dd id="detail-response"></dd></div>
+        </dl>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <p>Prompt Lab · Provedor fake · Dados somente locais</p>
+      </div>
+    </footer>
+  </body>
+</html>

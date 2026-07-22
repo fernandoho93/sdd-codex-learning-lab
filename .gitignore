@@ -1,0 +1,43 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.venv/
+venv/
+
+# Testes e ferramentas
+.coverage
+htmlcov/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+tests/.tmp/
+
+# Node.js e Playwright
+node_modules/
+playwright-report/
+test-results/
+blob-report/
+*.log
+
+# Segredos e configuração local
+.env
+.env.*
+!.env.example
+
+# Dados gerados localmente
+data/
+*.sqlite
+*.sqlite3
+*.sqlite-shm
+*.sqlite-wal
+
+# Editores e sistema operacional
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.tmp
+*.swp
